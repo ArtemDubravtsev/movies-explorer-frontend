@@ -1,12 +1,13 @@
 import React from "react";
 import like from "../../images/like.svg";
+import preview from "../../images/preview.jpg";
 
 export default function MoviesCard() {
   return (
     <div className="moviescard">
-      <a className="moviescard__link">
+      <a href="https://practicum.yandex.ru/" className="moviescard__link">
         <img
-          src="https://kinotv.ru/upload/resize_cache/iblock/606/1200_1200_1/606a63fd30fd7903213c5ee998cc6d4c.jpg"
+          src={preview}
           alt="Кадр из фильма"
           className="moviescard__preview"
         />

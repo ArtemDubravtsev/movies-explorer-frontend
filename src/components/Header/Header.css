@@ -3,6 +3,12 @@
   background-color: rgba(7, 48, 66, 1);
 }
 
+.header__logo {
+  width: 38px;
+  height: 38px;
+  margin-right: 45px;
+}
+
 .header__container {
   max-width: 1280px;
   max-height: 74px;
@@ -10,48 +16,83 @@
   height: 100%;
   margin: 0 auto;
   padding: 18px 70px;
-  background-color: transparent; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
 
-.header__auth {
+.header__navigation {
+  width: 100%;
   display: flex;
-  gap: 30px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+  justify-content: space-between;
+}
+
+.header__navigation-list {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+}
+
+.header__navigation-item {
+  display: flex;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
   align-items: center;
+}
+
+.header__navigation-profil {
+  width: 86px;
+  height: 32px;
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+  color: rgba(255, 255, 255, 1);
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header__navigation-ikon {
+  padding: 7px;
+  background-color: rgba(15, 65, 87, 1);
+  border-radius: 50%;
+}
+
+.header__auth {
+  max-width: 183px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__auth-register {
+  display: flex;
+  max-width: 77px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 1);
+  align-items: center;
+  text-decoration: none;
 }
 
 .header__auth-login {
   width: 76px;
   height: 32px;
-  border-radius: 3px;
-  background-color: rgba(61, 220, 132, 1);
-  padding: 0;
-  cursor: pointer;
+  background: rgba(61, 220, 132, 1);
   border: none;
-}
-
-.header__link-register {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  color: rgba(255, 255, 255, 1);
-  text-decoration: none;
-}
-
-.header__link-login {
+  border-radius: 3px;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   color: rgba(0, 0, 0, 1);
-  text-decoration: none;
 }
-
-
-

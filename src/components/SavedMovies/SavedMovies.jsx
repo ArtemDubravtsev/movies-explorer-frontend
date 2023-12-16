@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import SearchForm from "../SearchForm/SearchForm";
 
 export default function SavedMovies() {
   return (
-    <div>SavedMovies</div>
-  )
+    <>
+      <SearchForm />
+    </>
+  );
 }
