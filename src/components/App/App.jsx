@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -14,55 +13,56 @@ import Login from "../Login/Login";
 import Page404 from "../Page404/Page404";
 
 function App() {
-  const [isAuth] = useState(false);
-
-  const Wrap = ({ children, header = true, footer = true }) => {
-    return (
-      <>
-        {header && <Header isAuth={isAuth} />}
-        {children}
-        {footer && <Footer />}
-      </>
-    );
-  };
-
   return (
     <div className="page">
       <Routes>
         <Route
           path="/"
           element={
-            <Wrap>
+            <>
+              <Header name="promo" loggedIn={true} />
               <Main />
-            </Wrap>
+              <Footer />
+            </>
           }
-        />
+        ></Route>
+
         <Route
           path="/movies"
           element={
-            <Wrap>
+            <>
+              <Header loggedIn={true} />
               <Movies />
-            </Wrap>
+              <Footer />
+            </>
           }
-        />
+        ></Route>
+
         <Route
           path="/saved-movies"
           element={
-            <Wrap>
+            <>
+              <Header loggedIn={true} />
               <SavedMovies />
-            </Wrap>
+              <Footer />
+            </>
           }
-        />
+        ></Route>
+
         <Route
           path="/profile"
           element={
-            <Wrap footer={false}>
+            <>
+              <Header loggedIn={true} />
               <Profile />
-            </Wrap>
+            </>
           }
-        />
+        ></Route>
+
         <Route path="/signin" element={<Register />} />
+
         <Route path="/signup" element={<Login />} />
+
         <Route path="*" element={<Page404 />} />
       </Routes>
     </div>

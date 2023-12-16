@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import profil_ikon from "../../images/profil_icon.svg";
 
-export default function Header({ isAuth }) {
+export default function Header({ loggedIn, name }) {
   return (
-    <header className="header">
+    <header className={`header ${name === "promo" ? "header_auth-theme" : ""}`}>
       <div className="header__container">
         <Link to="/" className="header__logo">
           <img src={logo} alt="Логотип" />
         </Link>
-        {isAuth ? (
+        {loggedIn ? (
           <nav className="header__navigation">
             <li className="header__navigation-list">
               <Link to="/movies" className="header__navigation-item">

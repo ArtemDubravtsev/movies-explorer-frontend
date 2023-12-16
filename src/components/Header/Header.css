@@ -1,5 +1,8 @@
 .header {
   width: 100vw;
+}
+
+.header_auth-theme {
   background-color: rgba(7, 48, 66, 1);
 }
 
@@ -95,4 +98,5 @@
   font-size: 12px;
   line-height: 16px;
   color: rgba(0, 0, 0, 1);
+  cursor: pointer;
 }
