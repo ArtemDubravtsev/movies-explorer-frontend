@@ -24,14 +24,20 @@
 .portfolio__list {
   margin: 0;
   padding: 0;
-  padding-top: 50px;
+  padding-top: 30px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 }
 
 .portfolio__list-item {
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  align-items: flex-end;
   border-top: solid 1px rgba(66, 66, 66, 1);
 }
 
@@ -40,6 +46,8 @@
 }
 
 .portfolio__link {
+  max-width: 1140px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-weight: 400;

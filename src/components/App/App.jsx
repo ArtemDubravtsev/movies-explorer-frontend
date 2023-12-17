@@ -20,7 +20,7 @@ function App() {
           path="/"
           element={
             <>
-              <Header name="promo" loggedIn={true} />
+              <Header name="promo" loggedIn={false} />
               <Main />
               <Footer />
             </>
