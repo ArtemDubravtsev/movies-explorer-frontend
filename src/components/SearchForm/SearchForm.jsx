@@ -1,5 +1,6 @@
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import FilterCheckboxMobile from "../FilterCheckboxMobile/FilterCheckboxMobile";
 import search_ikon from "../../images/search_icon.svg";
 
 export default function SearchForm() {
@@ -20,7 +21,14 @@ export default function SearchForm() {
           <button type="submit" className="search-form__button">
             Найти
           </button>
-          <FilterCheckbox className="search-form__checkbox" />
+
+          <div className="searchform__wrapperCheckboxOne">
+            <FilterCheckbox className="search-form__checkbox" />
+          </div>
+
+          <div className="searchform__wrapperCheckboxTwo">
+            <FilterCheckboxMobile />
+          </div>
         </form>
       </div>
     </section>

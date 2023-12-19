@@ -4,6 +4,7 @@
 }
 
 .searchform__container {
+  position: relative;
   max-width: 1140px;
   max-height: 222px;
   width: 100%;
@@ -65,10 +66,43 @@
   transform: scale(0.95);
 }
 
+.searchform__wrapperCheckboxTwo {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  .searchform__container {
+  .searchform__form {
     max-width: 708px;
-    padding-top: 80px;
-    padding-bottom: 110px;
+  }
+
+  .searchform__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .searchform__wrapperCheckboxOne {
+    display: none;
+  }
+
+  .searchform__wrapperCheckboxTwo {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .searchform__wrapperCheckboxTwo {
+    display: flex;
+    position: absolute;
+    top: 160px;
+    left: 27%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .searchform__wrapperCheckboxTwo {
+    display: flex;
+    position: absolute;
+    top: 160px;
+    left: 17%;
   }
 }
