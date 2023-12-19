@@ -37,7 +37,7 @@ function Header() {
     <>
       {showOneHeader() && (
         <header className="header" id="header">
-          <Link to="/" className="form__logo">
+          <Link to="/" className="header__logo">
             <img src={logo} alt="логотип сайта" />
           </Link>
           <div className="header__button-container">
@@ -53,7 +53,7 @@ function Header() {
 
       {showTwoHeader() && (
         <header className="header header_color">
-          <Link to="/" className="form__logo">
+          <Link to="/" className="header__logo">
             <img src={logo} alt="логотип приложения" />
           </Link>
           <div className="header__button-container_films">
