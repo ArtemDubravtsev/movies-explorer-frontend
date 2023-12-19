@@ -1,25 +1,34 @@
 import React from "react";
 import photo from "../../images/photo.jpg";
 
-export default function AboutMe() {
+function AboutMe() {
   return (
-    <section className="aboutme">
-      <div className="aboutme__container">
-        <h2 className="about__title">Студент</h2>
-        <div className="aboutme__description">
-          <h3 className="aboutme__name">Артём</h3>
-          <p className="aboutme__subtitle">Фронтенд-разработчик, 35 лет</p>
-          <p className="aboutme__text">
+    <section className="about-me">
+      <h2 className="about-me__title">Студент</h2>
+      <div className="about-me__container">
+        <div className="about-me__text-container">
+          <h3 className="about-me__subtitle">Артем</h3>
+          <h4 className="about-me__information">
+            Фронтенд-разработчик, 35 лет
+          </h4>
+          <p className="about-me__history">
             ТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекст
             ТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекст
             ТекстТекстТекстТекстТекстТекстТекстТекст
           </p>
-          <a href="https://github.com/" className="aboutme__link">
+          <a
+            className="about-me__link"
+            href="https://github.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
             Github
           </a>
         </div>
-        <img src={photo} alt="Фотография" className="aboutme__photo" />
+        <img src={photo} className="about-me__avatar" alt="моя аватарка" />
       </div>
     </section>
   );
 }
+
+export default AboutMe;

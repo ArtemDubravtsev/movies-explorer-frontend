@@ -15,56 +15,58 @@ import Page404 from "../Page404/Page404";
 function App() {
   return (
     <div className="page">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header name="promo" loggedIn={false} />
-              <Main />
-              <Footer />
-            </>
-          }
-        ></Route>
+      <div className="page__content">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header />
+                <Main />
+                <Footer />
+              </>
+            }
+          ></Route>
 
-        <Route
-          path="/movies"
-          element={
-            <>
-              <Header loggedIn={true} />
-              <Movies />
-              <Footer />
-            </>
-          }
-        ></Route>
+          <Route
+            path="/movies"
+            element={
+              <>
+                <Header />
+                <Movies />
+                <Footer />
+              </>
+            }
+          ></Route>
 
-        <Route
-          path="/saved-movies"
-          element={
-            <>
-              <Header loggedIn={true} />
-              <SavedMovies />
-              <Footer />
-            </>
-          }
-        ></Route>
+          <Route
+            path="/saved-movies"
+            element={
+              <>
+                <Header />
+                <SavedMovies />
+                <Footer />
+              </>
+            }
+          ></Route>
 
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Header loggedIn={true} />
-              <Profile />
-            </>
-          }
-        ></Route>
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Header />
+                <Profile />
+              </>
+            }
+          ></Route>
 
-        <Route path="/signin" element={<Register />} />
+          <Route path="/signin" element={<Register />} />
 
-        <Route path="/signup" element={<Login />} />
+          <Route path="/signup" element={<Login />} />
 
-        <Route path="*" element={<Page404 />} />
-      </Routes>
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </div>
     </div>
   );
 }

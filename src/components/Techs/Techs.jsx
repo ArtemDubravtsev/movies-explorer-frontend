@@ -1,8 +1,9 @@
 import React from "react";
+import "./Techs.css";
 
-export default function Techs() {
+function Techs() {
   return (
-    <section className="techs">
+    <section className="techs" id="techs">
       <div className="techs__container">
         <h2 className="techs__title">Технологии</h2>
         <h3 className="techs__subtitle">7 технологий</h3>
@@ -23,3 +24,5 @@ export default function Techs() {
     </section>
   );
 }
+
+export default Techs;

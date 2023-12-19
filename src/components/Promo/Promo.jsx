@@ -1,15 +1,27 @@
 import React from "react";
-import promologo from "../../images/text__COLOR_landing-logo.svg";
+import landingLogo from "../../images/landing-logo.svg";
+import landingLogoMobile from "../../images/landingMobile-logo.svg";
 
-export default function Promo() {
+function Promo() {
   return (
     <section className="promo">
       <div className="promo__container">
         <h1 className="promo__title">
           Учебный проект студента факультета Веб-разработки.
         </h1>
-        <img src={promologo} className="promo__logo" alt="Промо логотип" />
+        <img
+          className="promo__image"
+          src={landingLogo}
+          alt="изображение спирали для оформления приложения"
+        />
+        <img
+          className="promo__imagemobile"
+          src={landingLogoMobile}
+          alt="изображение"
+        />
       </div>
     </section>
   );
 }
+
+export default Promo;

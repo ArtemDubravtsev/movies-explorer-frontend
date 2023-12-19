@@ -1,47 +1,101 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "./Header.css";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import profil_ikon from "../../images/profil_icon.svg";
+import account from "../../images/profile.svg";
+import mobileMenu from "../../images/menu-button.svg";
+import Navigation from "../Navigation/Navigation";
 
-export default function Header({ loggedIn, name }) {
+function Header() {
+  const location = useLocation();
+
+  const showOneHeader = () => {
+    const { pathname } = location;
+    return pathname === "/";
+  };
+
+  const showTwoHeader = () => {
+    const { pathname } = location;
+    return (
+      pathname === "/movies" ||
+      pathname === "/saved-movies" ||
+      pathname === "/profile"
+    );
+  };
+
+  const [isClicked, setIsClicked] = React.useState(false);
+
+  function handleOpenMobileMenu() {
+    setIsClicked(true);
+  }
+
+  function handleCloseMobileMenu() {
+    setIsClicked(false);
+  }
+
   return (
-    <header className={`header ${name === "promo" ? "header_auth-theme" : ""}`}>
-      <div className="header__container">
-        <Link to="/" className="header__logo">
-          <img src={logo} alt="Логотип" />
-        </Link>
-        {loggedIn ? (
-          <nav className="header__navigation">
-            <li className="header__navigation-list">
-              <Link to="/movies" className="header__navigation-item">
-                Фильмы
-              </Link>
-              <Link to="/saved-movies" className="header__navigation-item">
-                Сохранённые фильмы
-              </Link>
-            </li>
-            <Link to="/profile">
-              <button className="header__navigation-profil">
-                Аккаунт
-                <img
-                  src={profil_ikon}
-                  alt="Логотип"
-                  className="header__navigation-ikon"
-                />
-              </button>
-            </Link>
-          </nav>
-        ) : (
-          <nav className="header__auth">
-            <Link to="/signin" className="header__auth-register">
+    <>
+      {showOneHeader() && (
+        <header className="header" id="header">
+          <Link to="/" className="form__logo">
+            <img src={logo} alt="логотип сайта" />
+          </Link>
+          <div className="header__button-container">
+            <Link to="/signup" className="header__button">
               Регистрация
             </Link>
-            <Link to="/signup">
-              <button className="header__auth-login">Войти</button>
+            <Link to="/signin" className="header__button header__button-green">
+              Войти
             </Link>
-          </nav>
-        )}
-      </div>
-    </header>
+          </div>
+        </header>
+      )}
+
+      {showTwoHeader() && (
+        <header className="header header_color">
+          <Link to="/" className="form__logo">
+            <img src={logo} alt="логотип приложения" />
+          </Link>
+          <div className="header__button-container_films">
+            <NavLink
+              to="/movies"
+              className="header__button"
+              activeClassName="header__button_active"
+            >
+              Фильмы
+            </NavLink>
+            <NavLink
+              to="/saved-movies"
+              className="header__button"
+              activeClassName="header__button_active"
+            >
+              Сохранённые фильмы
+            </NavLink>
+          </div>
+          <div className="header__button-container">
+            <Link to="/profile" className="header__button-account">
+              <img
+                className="header__account-icon"
+                src={account}
+                alt="изображение иконки аккаунта"
+              />
+            </Link>
+            <button
+              className="header__menu-button"
+              onClick={handleOpenMobileMenu}
+            >
+              <img src={mobileMenu} alt="кнопка мобильного меню" />
+            </button>
+          </div>
+          {isClicked ? (
+            <Navigation handleCloseMobileMenu={handleCloseMobileMenu} />
+          ) : (
+            ""
+          )}
+        </header>
+      )}
+    </>
   );
 }
+
+export default Header;

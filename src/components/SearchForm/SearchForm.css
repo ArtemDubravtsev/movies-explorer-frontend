@@ -64,3 +64,11 @@
 .search-form__button:active {
   transform: scale(0.95);
 }
+
+@media screen and (max-width: 768px) {
+  .searchform__container {
+    max-width: 708px;
+    padding-top: 80px;
+    padding-bottom: 110px;
+  }
+}

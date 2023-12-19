@@ -16,6 +16,7 @@
   grid-template-columns: repeat(auto-fill, 270px);
   row-gap: 30px;
   column-gap: 20px;
+  justify-content: center;
 }
 
 .moviescardlist__more {
@@ -48,4 +49,14 @@
 
 .moviescardlist__button:active {
   transform: scale(0.95);
+}
+
+@media screen and (max-width: 768px) {
+  .moviescardlist__list {
+    max-width: 768px;
+    max-height: 1246px;
+    grid-template-columns: repeat(auto-fill, 339px);
+    padding-top: 80px;
+    
+  }
 }

@@ -1,78 +1,163 @@
-.aboutme {
-  width: 100vw;
-  background-color: rgba(32, 32, 32, 1);
+.about-me {
+  box-sizing: border-box;
+  padding: 110px 70px 100px 70px;
 }
 
-.aboutme__container {
-  max-width: 1140px;
-  width: 100%;
-  margin: 0 auto;
-  background-color: transparent;
-  display: grid;
-  grid-template-columns: minmax(0, 600px) minmax(0, 270px);
-  column-gap: 270px;
-  row-gap: 66px;
-  padding: 110px 0 100px 0;
-}
-
-.aboutme__description {
-  max-width: 600px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.aboutme__photo {
-  max-width: 270px;
-  width: 100%;
-  max-height: 327px;
-  height: 100%;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.about__title {
-  display: flex;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 27px;
-  letter-spacing: -0.04em;
-  color: rgba(255, 255, 255, 1);
+.about-me__title {
   margin: 0;
   padding-bottom: 23px;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  border-bottom: solid 1px rgba(66, 66, 66, 1);
-}
-
-.aboutme__name {
+  font-size: 22px;
+  font-style: normal;
   font-weight: 400;
-  font-size: 50px;
-  line-height: 58px;
+  line-height: normal;
+  letter-spacing: -0.88px;
   color: rgba(255, 255, 255, 1);
-  margin: 0;
+  border-bottom: 1px solid rgba(218, 218, 218, 1);
 }
 
-.aboutme__subtitle {
-  font-weight: 500;
+.about-me__container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 63px;
+}
+
+.about-me__text-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.about-me__subtitle {
+  margin: 0;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+  color: rgba(255, 255, 255, 1);
+}
+
+.about-me__information {
+  margin: 18px 0 0;
   font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
   line-height: 20px;
   color: rgba(255, 255, 255, 1);
-  margin: 18px 0 26px 0;
 }
 
-.aboutme__text {
-  font-weight: 400;
+.about-me__history {
+  margin: 26px 0 0;
   font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
   line-height: 22px;
   color: rgba(255, 255, 255, 1);
-  margin: 0;
 }
 
-.aboutme__link {
-  font-weight: 500;
+.about-me__link {
+  margin: 99px 0 0;
   font-size: 14px;
-  line-height: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   color: rgba(255, 255, 255, 1);
-  margin-top: auto;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.7s;
+}
+
+.about-me__link:hover {
+  color: rgba(61, 220, 132, 1);
+}
+
+.about-me__avatar {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1023px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+
+  .about-me__text-container {
+    margin-right: 49px;
+  }
+
+  .about-me__subtitle {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__information {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__history {
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__link {
+    margin-top: 87px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .about-me__avatar {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-me {
+    padding: 70px 14px;
+  }
+  .about-me__container {
+    margin-top: 60px;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .about-me__text-container {
+    margin-right: 0px;
+  }
+  .about-me__title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .about-me__subtitle {
+    margin-top: 40px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .about-me__information {
+    margin-top: 18px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about-me__history {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about-me__link {
+    margin-top: 40px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .about-me__avatar {
+    width: 255px;
+    height: 307px;
+  }
 }

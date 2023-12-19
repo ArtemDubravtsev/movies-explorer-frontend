@@ -1,44 +1,54 @@
 import React from "react";
-import ikon from "../../images/text__COLOR_font-main.svg";
+import "./Portfolio.css";
+import arrow from "../../images/arrow.svg";
 
-export default function Portfolio() {
+function Portfolio() {
   return (
     <section className="portfolio">
-      <div className="portfolio__container">
-        <h2 className="portfolio__title">Портфолио</h2>
-        <ul className="portfolio__list">
-          <li className="portfolio__list-item">
-            <a href="https://github.com/" className="portfolio__link">
-              <p className="portfolio__link-name">Статичный сайт</p>
-              <img
-                src={ikon}
-                alt="Иконка ссылки"
-                className="portfolio__link-ikon"
-              />
-            </a>
-          </li>
-          <li className="portfolio__list-item">
-          <a href="https://github.com/" className="portfolio__link">
-              <p className="portfolio__link-name">Адаптивный сайт</p>
-              <img
-                src={ikon}
-                alt="Иконка ссылки"
-                className="portfolio__link-ikon"
-              />
-            </a>
-          </li>
-          <li className="portfolio__list-item">
-          <a href="https://github.com/" className="portfolio__link">
-              <p className="portfolio__link-name">Одностраничное приложение</p>
-              <img
-                src={ikon}
-                alt="Иконка ссылки"
-                className="portfolio__link-ikon"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
+      <h3 className="portfolio__title">Портфолио</h3>
+      <nav className="portfolio__links">
+        <a
+          className="portfolio__link portfolio__link-border"
+          href="https://github.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <p className="portfolio__title-link">Статичный сайт</p>
+          <img
+            className="portfolio__image-arrow"
+            src={arrow}
+            alt="изображение стрелки для перехода по ссылке на сайт"
+          />
+        </a>
+        <a
+          className="portfolio__link portfolio__link-border"
+          href="https://github.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <p className="portfolio__title-link">Адаптивный сайт</p>
+          <img
+            className="portfolio__image-arrow"
+            src={arrow}
+            alt="изображение стрелки для перехода по ссылке на сайт"
+          />
+        </a>
+        <a
+          className="portfolio__link"
+          href="https://github.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <p className="portfolio__title-link">Одностраничное приложение</p>
+          <img
+            className="portfolio__image-arrow"
+            src={arrow}
+            alt="изображение стрелки для перехода по ссылке на сайт"
+          />
+        </a>
+      </nav>
     </section>
   );
 }
+
+export default Portfolio;
