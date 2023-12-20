@@ -74,8 +74,9 @@ function Header() {
           </div>
           <div className="header__button-container">
             <Link to="/profile" className="header__button-account">
+              <span className="header__button-text">Аккаунт</span>
               <img
-                className="header__account-icon"
+                className="header__button-icon"
                 src={account}
                 alt="изображение иконки аккаунта"
               />
@@ -84,7 +85,11 @@ function Header() {
               className="header__menu-button"
               onClick={handleOpenMobileMenu}
             >
-              <img src={mobileMenu} alt="кнопка мобильного меню" />
+              <img
+                src={mobileMenu}
+                alt="кнопка мобильного меню"
+                className="header__menu-ikon"
+              />
             </button>
           </div>
           {isClicked ? (

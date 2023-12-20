@@ -36,8 +36,13 @@ function Navigation({ handleCloseMobileMenu }) {
             Сохранённые фильмы
           </NavLink>
         </nav>
-        <Link to="/profile" className="navigation__account-button">
-          <img src={account} alt="аккаунт" />
+        <Link to="/profile" className="navigation__button-account">
+          <span className="navigation__button-text">Аккаунт</span>
+          <img
+            className="navigation__button-ikon"
+            src={account}
+            alt="аккаунт"
+          />
         </Link>
       </div>
     </div>

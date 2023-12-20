@@ -27,7 +27,7 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 60px;
   padding-bottom: 80px;
 }
 
@@ -46,6 +46,10 @@
   cursor: pointer;
 }
 
+.moviescardlist__button:hover {
+  opacity: 0.8;
+}
+
 .moviescardlist__button:active {
   transform: scale(0.95);
 }
@@ -59,8 +63,7 @@
   }
 
   .moviescardlist__more {
-    margin-top: 117px;
-    margin-bottom: 81px;
+    margin-top: 40px;
   }
 }
 
@@ -69,5 +72,20 @@
     margin: 50px auto 10px;
     grid-template-columns: repeat(1, 1fr);
     gap: 18px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .moviescardlist__list {
+    gap: 32px;
+  }
+
+  .moviescardlist__more {
+    margin: 0;
+    padding-top: 47px;
+  }
+
+  .moviescardlist__button {
+    max-width: 240px;
   }
 }

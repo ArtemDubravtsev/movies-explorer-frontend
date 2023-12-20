@@ -17,6 +17,7 @@ export default function SearchForm() {
             type="text"
             placeholder="Фильм"
             className="searchform__form__input"
+            required
           />
           <button type="submit" className="search-form__button">
             Найти

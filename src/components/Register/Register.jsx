@@ -8,15 +8,18 @@ export default function Register() {
       submit="Зарегистрироваться"
       question="Уже зарегистрированы?"
       link="Войти"
-      path="/signup"
+      path="/signin"
     >
       <label className="form__input">
         <p className="form__input-title">Имя</p>
         <input
           type="text"
           className="form__input-field"
+          placeholder="Имя"
           defaultValue="Виталий"
           required
+          minLength={2}
+          maxLength={30}
         />
         <p className="form__input-error">Что-то пошло не так...</p>
       </label>
@@ -26,6 +29,7 @@ export default function Register() {
         <input
           type="email"
           className="form__input-field"
+          placeholder="E-mail"
           defaultValue="pochta@yandex.ru"
           required
         />
@@ -37,8 +41,11 @@ export default function Register() {
         <input
           type="password"
           className="form__input-field form__input-field_error"
+          placeholder="Пароль"
           defaultValue="••••••••••••••"
           required
+          minLength={3}
+          maxLength={14}
         />
         <p className="form__input-error form__input-error_display">
           Что-то пошло не так...

@@ -133,6 +133,7 @@
     margin-top: 60px;
     gap: 56px 0;
     margin-bottom: 60px;
+    align-items: center;
   }
 
   .about-project__information {

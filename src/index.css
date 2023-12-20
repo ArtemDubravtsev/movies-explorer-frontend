@@ -2,10 +2,6 @@
 @import url(./vendor/fonts/fonts.css);
 
 .page {
-  max-width: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
-  background-color: rgba(32, 32, 32, 1);
   font-family: "Inter", Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -13,6 +9,31 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #202020;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.page__content {
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 1280px;
+  min-width: 320px;
+  width: 100%;
+  color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.inactive-button {
+  pointer-events: none;
 }
 
 @import url(./components/Header/Header.css);

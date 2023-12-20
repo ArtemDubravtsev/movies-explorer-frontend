@@ -58,3 +58,31 @@
   object-position: center;
   object-fit: cover;
 }
+
+@media screen and (max-width: 768px) {
+  .moviescard {
+    max-width: 339px;
+  }
+
+  .moviescard__preview {
+    max-width: 339px;
+  }
+
+  .moviescard__link {
+    padding-bottom: 6px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .moviescard {
+    max-width: 300px;
+  }
+
+  .moviescard__preview {
+    max-width: 300px;
+  }
+
+  .moviescard__link {
+    padding-bottom: 7px;
+  }
+}

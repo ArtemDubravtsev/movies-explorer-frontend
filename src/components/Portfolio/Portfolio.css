@@ -26,7 +26,11 @@
 }
 
 .portfolio__link:hover {
-  color: rgba(139, 139, 139, 1);
+  opacity: 0.7;;
+}
+
+.portfolio__image-arrow {
+  margin-right: 5px;
 }
 
 .portfolio__image-arrow:hover {
@@ -71,5 +75,11 @@
   .portfolio__title-link {
     font-size: 18px;
     line-height: 28px;
+  }
+
+  .portfolio__image-arrow {
+    width: 12px;
+    height: 22px;
+    margin-right: 5px;
   }
 }

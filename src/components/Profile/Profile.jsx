@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   return (
-    <>
+    <main>
       <section className="profile">
         <div className="profile__container">
           <h1 className="profile__title">Привет, Артем</h1>
@@ -13,25 +14,29 @@ export default function Profile() {
                 type="text"
                 dir="rtl"
                 placeholder="Имя"
+                defaultValue="Артем"
                 className="profile__form-input"
               />
             </label>
             <label className="profile__form-label">
               <span className="profile__form-title">E-Mail</span>
               <input
-                type="text"
+                type="email"
                 dir="rtl"
-                placeholder="E-Mail"
+                placeholder="E-mail"
+                defaultValue="pochta@yandex.ru"
                 className="profile__form-input"
               />
             </label>
           </form>
           <ul className="profile__links">
             <button className="profile__link">Редактировать</button>
-            <button className="profile__link">Выйти из аккаунта</button>
+            <Link to="/" className="profile__link">
+              Выйти из аккаунта
+            </Link>
           </ul>
         </div>
       </section>
-    </>
+    </main>
   );
 }

@@ -8,13 +8,14 @@ export default function Login() {
       submit="Войти"
       question="Ещё не зарегистрированы?"
       link="Регистрация"
-      path="/signin"
+      path="/signup"
     >
       <label className="form__input">
         <p className="form__input-title">E-mail</p>
         <input
           type="email"
           className="form__input-field"
+          placeholder="E-mail"
           defaultValue="pochta@yandex.ru"
           required
         />
@@ -23,7 +24,12 @@ export default function Login() {
 
       <label className="form__input">
         <p className="form__input-title">Пароль</p>
-        <input type="password" className="form__input-field" required />
+        <input
+          type="password"
+          className="form__input-field"
+          placeholder="Пароль"
+          required
+        />
         <p className="form__input-error">Что-то пошло не так...</p>
       </label>
     </Form>

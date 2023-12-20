@@ -60,9 +60,9 @@ function App() {
             }
           ></Route>
 
-          <Route path="/signin" element={<Register />} />
+          <Route path="/signup" element={<Register />} />
 
-          <Route path="/signup" element={<Login />} />
+          <Route path="/signin" element={<Login />} />
 
           <Route path="*" element={<Page404 />} />
         </Routes>

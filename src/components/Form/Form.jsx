@@ -11,25 +11,27 @@ export default function Form({
   link,
 }) {
   return (
-    <section className="form">
-      <div className="form__container">
-        <Link to="/" className="form__logo">
-          <img src={logo} alt="Логотип"></img>
-        </Link>
-        <h2 className="form__title">{title}</h2>
-        <form className="form__items">
-          <div className="form__item"> {children} </div>
-          <button type="submit" className="form__button">
-            {submit}
-          </button>
-        </form>
-        <p className="form__question">
-          {question}
-          <Link to={path} className="form__link">
-            {link}
+    <main>
+      <section className="form">
+        <div className="form__container">
+          <Link to="/" className="form__logo">
+            <img src={logo} alt="Логотип"></img>
           </Link>
-        </p>
-      </div>
-    </section>
+          <h1 className="form__title">{title}</h1>
+          <form className="form__items">
+            <div className="form__item"> {children} </div>
+            <button type="submit" className="form__button">
+              {submit}
+            </button>
+          </form>
+          <p className="form__question">
+            {question}
+            <Link to={path} className="form__link">
+              {link}
+            </Link>
+          </p>
+        </div>
+      </section>
+    </main>
   );
 }

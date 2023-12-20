@@ -24,7 +24,9 @@
   vertical-align: top;
   background: rgba(52, 52, 52, 1);
   transition: 0.2s;
+  cursor: pointer;
 }
+
 .filtercheckbox .filtercheckbox__switch:before {
   content: "";
   position: absolute;
