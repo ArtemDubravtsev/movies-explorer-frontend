@@ -36,61 +36,68 @@ function Header() {
   return (
     <>
       {showOneHeader() && (
-        <header className="header" id="header">
-          <Link to="/" className="header__logo">
-            <img src={logo} alt="логотип сайта" />
-          </Link>
-          <div className="header__button-container">
-            <Link to="/signup" className="header__button">
-              Регистрация
+        <header className="header header_color" id="header">
+          <div className="header__container">
+            <Link to="/" className="header__logo">
+              <img src={logo} alt="логотип сайта" />
             </Link>
-            <Link to="/signin" className="header__button header__button-green">
-              Войти
-            </Link>
+            <div className="header__button-container">
+              <Link to="/signup" className="header__button">
+                Регистрация
+              </Link>
+              <Link
+                to="/signin"
+                className="header__button header__button-green"
+              >
+                Войти
+              </Link>
+            </div>
           </div>
         </header>
       )}
 
       {showTwoHeader() && (
-        <header className="header header_color">
-          <Link to="/" className="header__logo">
-            <img src={logo} alt="логотип приложения" />
-          </Link>
-          <div className="header__button-container_films">
-            <NavLink
-              to="/movies"
-              className="header__button"
-              activeClassName="header__button_active"
-            >
-              Фильмы
-            </NavLink>
-            <NavLink
-              to="/saved-movies"
-              className="header__button"
-              activeClassName="header__button_active"
-            >
-              Сохранённые фильмы
-            </NavLink>
-          </div>
-          <div className="header__button-container">
-            <Link to="/profile" className="header__button-account">
-              <span className="header__button-text">Аккаунт</span>
-              <img
-                className="header__button-icon"
-                src={account}
-                alt="изображение иконки аккаунта"
-              />
+        <header className="header">
+          <div className="header__container">
+            <Link to="/" className="header__logo">
+              <img src={logo} alt="логотип приложения" />
             </Link>
-            <button
-              className="header__menu-button"
-              onClick={handleOpenMobileMenu}
-            >
-              <img
-                src={mobileMenu}
-                alt="кнопка мобильного меню"
-                className="header__menu-ikon"
-              />
-            </button>
+            <div className="header__container-films">
+              <NavLink
+                to="/movies"
+                className="header__button"
+                activeClassName="header__button_active"
+              >
+                Фильмы
+              </NavLink>
+              <NavLink
+                to="/saved-movies"
+                className="header__button"
+                activeClassName="header__button_active"
+              >
+                Сохранённые фильмы
+              </NavLink>
+            </div>
+            <div className="header__button-container">
+              <Link to="/profile" className="header__button-account">
+                <span className="header__button-text">Аккаунт</span>
+                <img
+                  className="header__button-icon"
+                  src={account}
+                  alt="изображение иконки аккаунта"
+                />
+              </Link>
+              <button
+                className="header__menu-button"
+                onClick={handleOpenMobileMenu}
+              >
+                <img
+                  src={mobileMenu}
+                  alt="кнопка мобильного меню"
+                  className="header__menu-ikon"
+                />
+              </button>
+            </div>
           </div>
           {isClicked ? (
             <Navigation handleCloseMobileMenu={handleCloseMobileMenu} />

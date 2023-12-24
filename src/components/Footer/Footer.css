@@ -8,6 +8,11 @@
   padding-bottom: 20px;
 }
 
+.footer__container {
+  display: flex;
+  margin-top: 20px;
+}
+
 .footer__title {
   margin: 0;
   padding-bottom: 20px;
@@ -20,11 +25,6 @@
   line-height: normal;
   text-align: center;
   border-bottom: 2px solid rgba(66, 66, 66, 1);
-}
-
-.footer__container {
-  display: flex;
-  margin-top: 20px;
 }
 
 .footer__subtitle {
@@ -51,15 +51,18 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 768px) {
   .footer {
-    margin: 79px 30px 0px 30px;
+    max-width: 708px;
+    margin-left: 30px;
+    margin-right: 30px;
   }
 }
 
 @media screen and (max-width: 576px) {
   .footer {
-    margin: 79px 10px 0px 10px;
+    max-width: 300px;
+    margin: 79px auto 0px auto;
   }
 
   .footer__title {

@@ -16,10 +16,10 @@ export default function SearchForm() {
           <input
             type="text"
             placeholder="Фильм"
-            className="searchform__form__input"
+            className="searchform__form-input"
             required
           />
-          <button type="submit" className="search-form__button">
+          <button type="submit" className="searchform__button">
             Найти
           </button>
 

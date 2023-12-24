@@ -2,14 +2,12 @@
   background: rgba(7, 48, 66, 1);
   box-sizing: border-box;
   padding: 50px 70px 63px;
-  height: 100%;
 }
 
 .promo__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   max-width: 100%;
 }
 
