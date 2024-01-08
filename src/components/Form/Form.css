@@ -76,9 +76,9 @@
   color: rgba(238, 52, 101, 1);
 }
 
-.form__input-error_display {
+/* .form__input-error_display {
   display: block;
-}
+} */
 
 .form__input-field_error {
   color: rgba(238, 52, 101, 1);

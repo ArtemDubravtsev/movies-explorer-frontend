@@ -9,6 +9,7 @@ export default function Form({
   question,
   path,
   link,
+  onSubmit,
 }) {
   return (
     <main>
@@ -18,7 +19,7 @@ export default function Form({
             <img src={logo} alt="Логотип"></img>
           </Link>
           <h1 className="form__title">{title}</h1>
-          <form className="form__items">
+          <form className="form__items" onSubmit={onSubmit}>
             <div className="form__item"> {children} </div>
             <button type="submit" className="form__button">
               {submit}
