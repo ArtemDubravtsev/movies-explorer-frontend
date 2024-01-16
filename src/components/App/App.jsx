@@ -1,6 +1,15 @@
 import React from "react";
+
+import MainApi from "../../utils/MainApi";
+import {
+  registration,
+  authorization,
+  getUserData,
+} from "../../utils/RegisterAuth";
+
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -12,16 +21,32 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Page404 from "../Page404/Page404";
 
-import {
-  registration,
-  authorization,
-  getUserData,
-} from "../../utils/RegisterAuth";
-
 function App() {
   const navigate = useNavigate();
   //регистрация/авторизация
   const [loggedIn, setLoggedIn] = useState(false);
+  //контекст
+  const [currentUser, setCurrentUser] = useState({});
+
+  function handleUpdateUser(dataUser) {
+    MainApi.setProfilInfo(dataUser, localStorage.jwt)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((error) =>
+        console.log(`Ошибка при редактировании данных ${error}`)
+      );
+  }
+
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([MainApi.getInfo(localStorage.jwt)])
+        .then(([dataUser]) => {
+          setCurrentUser(dataUser);
+        })
+        .catch((error) => console.log(`Ошибка при создании данных ${error}`));
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
     if (localStorage.jwt) {
@@ -58,63 +83,68 @@ function App() {
   }
 
   return (
-    <div className="page">
-      <div className="page__content">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Header />
-                <Main />
-                <Footer />
-              </>
-            }
-          ></Route>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="page__content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Header />
+                  <Main />
+                  <Footer />
+                </>
+              }
+            ></Route>
 
-          <Route
-            path="/movies"
-            element={
-              <>
-                <Header />
-                <Movies />
-                <Footer />
-              </>
-            }
-          ></Route>
+            <Route
+              path="/movies"
+              element={
+                <>
+                  <Header />
+                  <Movies />
+                  <Footer />
+                </>
+              }
+            ></Route>
 
-          <Route
-            path="/saved-movies"
-            element={
-              <>
-                <Header />
-                <SavedMovies />
-                <Footer />
-              </>
-            }
-          ></Route>
+            <Route
+              path="/saved-movies"
+              element={
+                <>
+                  <Header />
+                  <SavedMovies />
+                  <Footer />
+                </>
+              }
+            ></Route>
 
-          <Route
-            path="/profile"
-            element={
-              <>
-                <Header />
-                <Profile />
-              </>
-            }
-          ></Route>
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <Header />
+                  <Profile onUpdateUser={handleUpdateUser} />
+                </>
+              }
+            ></Route>
 
-          <Route
-            path="/signup"
-            element={<Register handleRegister={handleRegister} />}
-          />
+            <Route
+              path="/signup"
+              element={<Register handleRegister={handleRegister} />}
+            />
 
-          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+            <Route
+              path="/signin"
+              element={<Login handleLogin={handleLogin} />}
+            />
 
-          <Route path="*" element={<Page404 />} />
-        </Routes>
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

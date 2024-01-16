@@ -1,3 +1,5 @@
+// const baseUrl = "https://api.artmovie.nomoredomainsmonster.ru";
+
 const baseUrl = "http://localhost:3000";
 
 function getResponceData(res) {
