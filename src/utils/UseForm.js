@@ -17,9 +17,9 @@ export default function UseForm() {
     });
   }, []);
 
-  function reset(data = {}) {
-    setValues(data);
-  }
+  // function reset(data = {}) {
+  //   setValues(data);
+  // }
 
-  return { values, handleChange, setValue, reset };
+  return { values, handleChange, setValue };
 }

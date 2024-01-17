@@ -1,16 +1,13 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList() {
+export default function MoviesCardList({ movies }) {
   return (
     <section className="moviescardlist">
       <ul className="moviescardlist__list">
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        
+        {movies.map((data) => {
+          return <MoviesCard movies={movies} data={data} key={data.id} />;
+        })}
       </ul>
       <div className="moviescardlist__more">
         <button type="button" className="moviescardlist__button">

@@ -1,11 +1,11 @@
 import React from "react";
-
-import MainApi from "../../utils/MainApi";
 import {
   registration,
   authorization,
   getUserData,
 } from "../../utils/RegisterAuth";
+import MainApi from "../../utils/MainApi";
+import MoviesApi from "../../utils/MoviesApi";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -25,13 +25,19 @@ function App() {
   const navigate = useNavigate();
   //регистрация/авторизация
   const [loggedIn, setLoggedIn] = useState(false);
-  //контекст
+  //юзер
   const [currentUser, setCurrentUser] = useState({});
+  //мувис
+  const [movies, setMovies] = useState([]);
+  //прелоадер
+  const [isPreloader, setIsPreloader] = useState(true);
 
   function handleUpdateUser(dataUser) {
+    setIsPreloader(true);
     MainApi.setProfilInfo(dataUser, localStorage.jwt)
       .then((res) => {
         setCurrentUser(res);
+        setIsPreloader(false);
       })
       .catch((error) =>
         console.log(`Ошибка при редактировании данных ${error}`)
@@ -39,10 +45,16 @@ function App() {
   }
 
   useEffect(() => {
+    setIsPreloader(true);
     if (loggedIn) {
-      Promise.all([MainApi.getInfo(localStorage.jwt)])
-        .then(([dataUser]) => {
+      Promise.all([
+        MainApi.getInfo(localStorage.jwt),
+        MoviesApi.getMovies(localStorage.jwt),
+      ])
+        .then(([dataUser, dataMovies]) => {
           setCurrentUser(dataUser);
+          setMovies(dataMovies);
+          setIsPreloader(false);
         })
         .catch((error) => console.log(`Ошибка при создании данных ${error}`));
     }
@@ -58,7 +70,7 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-  }, [loggedIn]);
+  }, []);
 
   function handleRegister(username, email, password) {
     registration(username, email, password)
@@ -103,7 +115,7 @@ function App() {
               element={
                 <>
                   <Header />
-                  <Movies />
+                  <Movies movies={movies} />
                   <Footer />
                 </>
               }
@@ -125,7 +137,10 @@ function App() {
               element={
                 <>
                   <Header />
-                  <Profile onUpdateUser={handleUpdateUser} />
+                  <Profile
+                    onUpdateUser={handleUpdateUser}
+                    isPreloader={isPreloader}
+                  />
                 </>
               }
             ></Route>
