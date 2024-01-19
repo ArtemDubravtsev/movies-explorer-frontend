@@ -19,6 +19,11 @@ export default function Profile({ onUpdateUser, isPreloader }) {
     onUpdateUser({ username: values.username, email: values.email });
   }
 
+  function onSignOut() {
+    localStorage.removeItem("jwt");
+    window.location.reload();
+  }
+
   return (
     <main>
       {isPreloader ? (
@@ -55,7 +60,7 @@ export default function Profile({ onUpdateUser, isPreloader }) {
               <button className="profile__link" onClick={handleSubmit}>
                 Редактировать
               </button>
-              <Link to="/" className="profile__link">
+              <Link to="/" className="profile__link" onClick={onSignOut}>
                 Выйти из аккаунта
               </Link>
             </ul>

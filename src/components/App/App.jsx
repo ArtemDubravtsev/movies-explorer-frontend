@@ -20,6 +20,7 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Page404 from "../Page404/Page404";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <Header />
+                  <Header loggedIn={loggedIn} />
                   <Main />
                   <Footer />
                 </>
@@ -114,8 +115,12 @@ function App() {
               path="/movies"
               element={
                 <>
-                  <Header />
-                  <Movies movies={movies} />
+                  <ProtectedRoute
+                    element={Movies}
+                    loggedIn={loggedIn}
+                    movies={movies}
+                    isPreloader={isPreloader}
+                  />
                   <Footer />
                 </>
               }
@@ -125,8 +130,12 @@ function App() {
               path="/saved-movies"
               element={
                 <>
-                  <Header />
-                  <SavedMovies />
+                  <ProtectedRoute
+                    element={SavedMovies}
+                    loggedIn={loggedIn}
+                    movies={movies}
+                    isPreloader={isPreloader}
+                  />
                   <Footer />
                 </>
               }
@@ -135,13 +144,12 @@ function App() {
             <Route
               path="/profile"
               element={
-                <>
-                  <Header />
-                  <Profile
-                    onUpdateUser={handleUpdateUser}
-                    isPreloader={isPreloader}
-                  />
-                </>
+                <ProtectedRoute
+                  element={Profile}
+                  loggedIn={loggedIn}
+                  onUpdateUser={handleUpdateUser}
+                  isPreloader={isPreloader}
+                />
               }
             ></Route>
 
