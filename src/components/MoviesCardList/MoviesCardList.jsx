@@ -2,10 +2,10 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 
-export default function MoviesCardList({ movies, isPreloader }) {
+export default function MoviesCardList({ movies, isSend }) {
   return (
     <section className="moviescardlist">
-      {isPreloader ? (
+      {isSend ? (
         <Preloader />
       ) : (
         <>

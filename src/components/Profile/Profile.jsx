@@ -5,7 +5,7 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 import UseForm from "../../utils/UseForm";
 import Preloader from "../Preloader/Preloader";
 
-export default function Profile({ onUpdateUser, isPreloader }) {
+export default function Profile({ onUpdateUser, isSend, handleLogOut }) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, setValue } = UseForm();
 
@@ -19,14 +19,9 @@ export default function Profile({ onUpdateUser, isPreloader }) {
     onUpdateUser({ username: values.username, email: values.email });
   }
 
-  function onSignOut() {
-    localStorage.removeItem("jwt");
-    window.location.reload();
-  }
-
   return (
     <main>
-      {isPreloader ? (
+      {isSend ? (
         <Preloader />
       ) : (
         <section className="profile">
@@ -60,7 +55,7 @@ export default function Profile({ onUpdateUser, isPreloader }) {
               <button className="profile__link" onClick={handleSubmit}>
                 Редактировать
               </button>
-              <Link to="/" className="profile__link" onClick={onSignOut}>
+              <Link to="/" className="profile__link" onClick={handleLogOut}>
                 Выйти из аккаунта
               </Link>
             </ul>

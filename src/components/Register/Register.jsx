@@ -2,8 +2,8 @@ import React from "react";
 import Form from "../Form/Form";
 import UseForm from "../../utils/UseForm";
 
-export default function Register({ handleRegister }) {
-  const { values, handleChange } = UseForm();
+export default function Register({ handleRegister, isSend }) {
+  const { values, error, isValid, handleChange } = UseForm();
 
   function onRegister(evt) {
     evt.preventDefault();
@@ -18,6 +18,8 @@ export default function Register({ handleRegister }) {
       link="Войти"
       path="/signin"
       onSubmit={onRegister}
+      isSend={isSend}
+      isValid={isValid}
     >
       <label className="form__input">
         <p className="form__input-title">Имя</p>
@@ -32,7 +34,7 @@ export default function Register({ handleRegister }) {
           value={values.username}
           onChange={handleChange}
         />
-        <p className="form__input-error">Что-то пошло не так...</p>
+        <p className="form__input-error">{error.username}</p>
       </label>
 
       <label className="form__input">
@@ -46,7 +48,7 @@ export default function Register({ handleRegister }) {
           value={values.email}
           onChange={handleChange}
         />
-        <p className="form__input-error">Что-то пошло не так...</p>
+        <p className="form__input-error">{error.email}</p>
       </label>
 
       <label className="form__input">
@@ -63,7 +65,7 @@ export default function Register({ handleRegister }) {
           onChange={handleChange}
         />
         <p className="form__input-error form__input-error_display">
-          Что-то пошло не так...
+          {error.password}
         </p>
       </label>
     </Form>

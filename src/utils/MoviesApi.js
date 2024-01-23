@@ -9,12 +9,12 @@ class MoviesApi {
       : Promise.reject({ status: res.status, res: res });
   }
 
-  getMovies(token) {
-    return fetch(`${this._url}`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }).then(this._getResponse);
+  requestMovies(url, options) {
+    return fetch(`${this._url}${url}`, options).then(this._getResponse);
+  }
+
+  getMovies() {
+    return this.requestMovies("/");
   }
 }
 

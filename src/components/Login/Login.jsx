@@ -2,8 +2,8 @@ import React from "react";
 import Form from "../Form/Form";
 import UseForm from "../../utils/UseForm";
 
-export default function Login({ handleLogin }) {
-  const { values, handleChange } = UseForm();
+export default function Login({ handleLogin, isSend }) {
+  const { values, error, isValid, handleChange } = UseForm();
 
   function onLogin(evt) {
     evt.preventDefault();
@@ -18,6 +18,8 @@ export default function Login({ handleLogin }) {
       link="Регистрация"
       path="/signup"
       onSubmit={onLogin}
+      isSend={isSend}
+      isValid={isValid}
     >
       <label className="form__input">
         <p className="form__input-title">E-mail</p>
@@ -30,7 +32,7 @@ export default function Login({ handleLogin }) {
           value={values.email}
           onChange={handleChange}
         />
-        <p className="form__input-error">Что-то пошло не так...</p>
+        <p className="form__input-error">{error.email}</p>
       </label>
 
       <label className="form__input">
@@ -41,10 +43,12 @@ export default function Login({ handleLogin }) {
           className="form__input-field"
           placeholder="Пароль"
           required
+          minLength={3}
+          maxLength={14}
           value={values.password}
           onChange={handleChange}
         />
-        <p className="form__input-error">Что-то пошло не так...</p>
+        <p className="form__input-error">{error.password}</p>
       </label>
     </Form>
   );

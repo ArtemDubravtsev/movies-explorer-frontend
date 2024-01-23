@@ -26,27 +26,58 @@ function App() {
   const navigate = useNavigate();
   //регистрация/авторизация
   const [loggedIn, setLoggedIn] = useState(false);
-  //юзер
+  //юзер контекст
   const [currentUser, setCurrentUser] = useState({});
   //мувис
   const [movies, setMovies] = useState([]);
-  //прелоадер
-  const [isPreloader, setIsPreloader] = useState(true);
+  //отправка данных
+  const [isSend, setIsSend] = useState(false);
+
+  function handleRegister(username, email, password) {
+    setIsSend(true);
+    registration(username, email, password)
+      .then(() => {
+        navigate("/signin");
+        setIsSend(false);
+      })
+      .catch((err) => {
+        console.error(`Ошибка при регистрации ${err}`);
+      });
+  }
+
+  function handleLogin(email, password) {
+    setIsSend(true);
+    authorization(email, password)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setLoggedIn(true);
+        navigate("/movies");
+        setIsSend(false);
+      })
+      .catch((err) => {
+        console.error(`Ошибка при авторизации ${err}`);
+      });
+  }
 
   function handleUpdateUser(dataUser) {
-    setIsPreloader(true);
+    setIsSend(true);
     MainApi.setProfilInfo(dataUser, localStorage.jwt)
       .then((res) => {
         setCurrentUser(res);
-        setIsPreloader(false);
+        setIsSend(false);
       })
       .catch((error) =>
         console.log(`Ошибка при редактировании данных ${error}`)
       );
   }
 
+  function handleLogOut() {
+    localStorage.clear();
+    setLoggedIn(false);
+    navigate("/");
+  }
+
   useEffect(() => {
-    setIsPreloader(true);
     if (loggedIn) {
       Promise.all([
         MainApi.getInfo(localStorage.jwt),
@@ -55,7 +86,6 @@ function App() {
         .then(([dataUser, dataMovies]) => {
           setCurrentUser(dataUser);
           setMovies(dataMovies);
-          setIsPreloader(false);
         })
         .catch((error) => console.log(`Ошибка при создании данных ${error}`));
     }
@@ -72,28 +102,6 @@ function App() {
       setLoggedIn(false);
     }
   }, []);
-
-  function handleRegister(username, email, password) {
-    registration(username, email, password)
-      .then(() => {
-        navigate("/signin");
-      })
-      .catch((err) => {
-        console.error(`Ошибка при регистрации ${err}`);
-      });
-  }
-
-  function handleLogin(email, password) {
-    authorization(email, password)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        setLoggedIn(true);
-        navigate("/movies");
-      })
-      .catch((err) => {
-        console.error(`Ошибка при авторизации ${err}`);
-      });
-  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -119,7 +127,7 @@ function App() {
                     element={Movies}
                     loggedIn={loggedIn}
                     movies={movies}
-                    isPreloader={isPreloader}
+                    isSend={isSend}
                   />
                   <Footer />
                 </>
@@ -134,7 +142,7 @@ function App() {
                     element={SavedMovies}
                     loggedIn={loggedIn}
                     movies={movies}
-                    isPreloader={isPreloader}
+                    isSend={isSend}
                   />
                   <Footer />
                 </>
@@ -148,19 +156,23 @@ function App() {
                   element={Profile}
                   loggedIn={loggedIn}
                   onUpdateUser={handleUpdateUser}
-                  isPreloader={isPreloader}
+                  handleLogin={handleLogin}
+                  handleLogOut={handleLogOut}
+                  isSend={isSend}
                 />
               }
             ></Route>
 
             <Route
               path="/signup"
-              element={<Register handleRegister={handleRegister} />}
+              element={
+                <Register handleRegister={handleRegister} isSend={isSend} />
+              }
             />
 
             <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} />}
+              element={<Login handleLogin={handleLogin} isSend={isSend} />}
             />
 
             <Route path="*" element={<Page404 />} />
