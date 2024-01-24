@@ -32,6 +32,12 @@ function App() {
   const [movies, setMovies] = useState([]);
   //отправка данных
   const [isSend, setIsSend] = useState(false);
+  //редактирование данных юзера
+  const [isEditData, setIsEditData] = useState(false);
+  //ответ результата редакт.данных
+  const [isEditAnswer, setIsEditAnswer] = useState(false);
+  //ошибки
+  const [isError, setIsError] = useState(false);
 
   function handleRegister(username, email, password) {
     setIsSend(true);
@@ -64,11 +70,17 @@ function App() {
     MainApi.setProfilInfo(dataUser, localStorage.jwt)
       .then((res) => {
         setCurrentUser(res);
+        setIsEditData(false);
         setIsSend(false);
+        setIsEditAnswer(true);
       })
-      .catch((error) =>
-        console.log(`Ошибка при редактировании данных ${error}`)
-      );
+      .catch((error) => {
+        setIsError(true);
+        console.error(`Ошибка при редактировании данных ${error}`);
+      })
+      .finally(() => {
+        setIsSend(false);
+      });
   }
 
   function handleLogOut() {
@@ -159,6 +171,12 @@ function App() {
                   handleLogin={handleLogin}
                   handleLogOut={handleLogOut}
                   isSend={isSend}
+                  isEditData={isEditData}
+                  setIsEditData={setIsEditData}
+                  isEditAnswer={isEditAnswer}
+                  setIsEditAnswer={setIsEditAnswer}
+                  isError={isError}
+                  setIsError={setIsError}
                 />
               }
             ></Route>

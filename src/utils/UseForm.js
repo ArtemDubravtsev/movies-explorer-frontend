@@ -31,5 +31,5 @@ export default function UseForm() {
     });
   }, []);
 
-  return { values, error, isValid, handleChange, setValue };
+  return { values, error, isValid, handleChange, setValue, setError };
 }
