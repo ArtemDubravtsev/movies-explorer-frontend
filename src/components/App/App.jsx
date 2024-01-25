@@ -43,11 +43,14 @@ function App() {
     setIsSend(true);
     registration(username, email, password)
       .then(() => {
-        navigate("/signin");
-        setIsSend(false);
+        handleLogin(username, email, password);
       })
       .catch((err) => {
+        setIsError(true);
         console.error(`Ошибка при регистрации ${err}`);
+      })
+      .finally(() => {
+        setIsSend(false);
       });
   }
 
@@ -57,11 +60,15 @@ function App() {
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
+        setCurrentUser(res);
         navigate("/movies");
-        setIsSend(false);
       })
       .catch((err) => {
+        setIsError(true);
         console.error(`Ошибка при авторизации ${err}`);
+      })
+      .finally(() => {
+        setIsSend(false);
       });
   }
 
@@ -71,7 +78,6 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         setIsEditData(false);
-        setIsSend(false);
         setIsEditAnswer(true);
       })
       .catch((error) => {
@@ -168,7 +174,6 @@ function App() {
                   element={Profile}
                   loggedIn={loggedIn}
                   onUpdateUser={handleUpdateUser}
-                  handleLogin={handleLogin}
                   handleLogOut={handleLogOut}
                   isSend={isSend}
                   isEditData={isEditData}
@@ -184,13 +189,25 @@ function App() {
             <Route
               path="/signup"
               element={
-                <Register handleRegister={handleRegister} isSend={isSend} />
+                <Register
+                  handleRegister={handleRegister}
+                  isSend={isSend}
+                  isError={isError}
+                  setIsError={setIsError}
+                />
               }
             />
 
             <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} isSend={isSend} />}
+              element={
+                <Login
+                  handleLogin={handleLogin}
+                  isSend={isSend}
+                  isError={isError}
+                  setIsError={setIsError}
+                />
+              }
             />
 
             <Route path="*" element={<Page404 />} />

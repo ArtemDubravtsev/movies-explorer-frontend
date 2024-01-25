@@ -36,6 +36,7 @@ export default function Profile({
     onUpdateUser({ username: values.username, email: values.email });
   }
 
+  // в задании нет
   function handleCancel() {
     setValue("username", currentUser.name);
     setValue("email", currentUser.email);
@@ -122,6 +123,7 @@ export default function Profile({
                   >
                     Сохранить
                   </button>
+                  {/* в задании нет */}
                   <button
                     className="profile__link-cancel"
                     onClick={() => {

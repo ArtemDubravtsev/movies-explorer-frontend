@@ -134,7 +134,6 @@
 
 .profile__link-submit_disabled:hover {
   opacity: 1;
-  cursor: auto;
 }
 
 .profile__message-error {

@@ -2,7 +2,12 @@ import React from "react";
 import Form from "../Form/Form";
 import UseForm from "../../utils/UseForm";
 
-export default function Register({ handleRegister, isSend }) {
+export default function Register({
+  handleRegister,
+  isSend,
+  isError,
+  setIsError,
+}) {
   const { values, error, isValid, handleChange } = UseForm();
 
   function onRegister(evt) {
@@ -20,6 +25,8 @@ export default function Register({ handleRegister, isSend }) {
       onSubmit={onRegister}
       isSend={isSend}
       isValid={isValid}
+      isError={isError}
+      setIsError={setIsError}
     >
       <label className="form__input">
         <p className="form__input-title">Имя</p>

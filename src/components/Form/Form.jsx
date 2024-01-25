@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import Preloader from "../Preloader/Preloader";
 
@@ -13,7 +13,15 @@ export default function Form({
   onSubmit,
   isValid,
   isSend,
+  isError,
+  setIsError,
 }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsError(false);
+  }, [setIsError]);
+
   return (
     <main>
       {isSend ? (
@@ -27,15 +35,30 @@ export default function Form({
             <h1 className="form__title">{title}</h1>
             <form className="form__items" onSubmit={onSubmit}>
               <div className="form__item"> {children} </div>
+
+              {isError && location.pathname === "/signup" ? (
+                <span className="form__message-error">
+                  При регистрации пользователя произошла ошибка.
+                </span>
+              ) : isError && location.pathname === "/signin" ? (
+                <span className="form__message-error">
+                  При авторизации произошла ошибка.
+                </span>
+              ) : (
+                " "
+              )}
+
               <button
                 type="submit"
                 className={`form__button ${
-                  isValid ? "" : "form__button_disabled"
+                  isSend || !isValid || isError ? "form__button_disabled" : ""
                 }`}
+                disabled={isSend || !isValid || isError}
               >
                 {submit}
               </button>
             </form>
+
             <p className="form__question">
               {question}
               <Link to={path} className="form__link">

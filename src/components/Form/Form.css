@@ -97,13 +97,28 @@
   cursor: pointer;
 }
 
+.form__button:hover {
+  opacity: 0.8;
+}
+
 .form__button_disabled {
   background-color: rgba(248, 248, 248, 1);
   color: rgba(194, 194, 194, 1);
 }
 
-.form__button:hover {
-  opacity: 0.8;
+.form__button_disabled:hover {
+  opacity: 1;
+}
+
+.form__message-error {
+  margin: 0;
+  margin-top: auto;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: rgba(238, 52, 101, 1);
+  text-align: center;
 }
 
 .form__question {
