@@ -31,7 +31,7 @@ export default function Login({ handleLogin, isSend, isError, setIsError }) {
           className="form__input-field"
           placeholder="E-mail"
           required
-          value={values.email}
+          value={values.email ? values.email : ""}
           onChange={handleChange}
         />
         <p className="form__input-error">{error.email}</p>
@@ -47,7 +47,7 @@ export default function Login({ handleLogin, isSend, isError, setIsError }) {
           required
           minLength={3}
           maxLength={14}
-          value={values.password}
+          value={values.password ? values.password : ""}
           onChange={handleChange}
         />
         <p className="form__input-error">{error.password}</p>

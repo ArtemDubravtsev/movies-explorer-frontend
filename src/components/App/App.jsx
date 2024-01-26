@@ -20,12 +20,15 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Page404 from "../Page404/Page404";
+import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();
   //регистрация/авторизация
   const [loggedIn, setLoggedIn] = useState(false);
+  //проверка токена
+  const [isCheckToken, setIsCheckToken] = useState(true);
   //юзер контекст
   const [currentUser, setCurrentUser] = useState({});
   //мувис
@@ -96,16 +99,23 @@ function App() {
   }
 
   useEffect(() => {
-    if (loggedIn) {
+    if (localStorage.jwt) {
       Promise.all([
         MainApi.getInfo(localStorage.jwt),
         MoviesApi.getMovies(localStorage.jwt),
       ])
         .then(([dataUser, dataMovies]) => {
-          setCurrentUser(dataUser);
           setMovies(dataMovies);
+          setCurrentUser(dataUser);
+          setLoggedIn(true);
+          setIsCheckToken(false);
         })
-        .catch((error) => console.log(`Ошибка при создании данных ${error}`));
+        .catch((error) => {
+          console.log(`Ошибка при создании данных ${error}`);
+          setIsCheckToken(false);
+        });
+    } else {
+      setIsCheckToken(false);
     }
   }, [loggedIn]);
 
@@ -125,93 +135,97 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="page__content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Header loggedIn={loggedIn} />
-                  <Main />
-                  <Footer />
-                </>
-              }
-            ></Route>
+          {isCheckToken ? (
+            <Preloader />
+          ) : (
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Header loggedIn={loggedIn} />
+                    <Main />
+                    <Footer />
+                  </>
+                }
+              ></Route>
 
-            <Route
-              path="/movies"
-              element={
-                <>
+              <Route
+                path="/movies"
+                element={
+                  <>
+                    <ProtectedRoute
+                      element={Movies}
+                      loggedIn={loggedIn}
+                      movies={movies}
+                      isSend={isSend}
+                    />
+                    <Footer />
+                  </>
+                }
+              ></Route>
+
+              <Route
+                path="/saved-movies"
+                element={
+                  <>
+                    <ProtectedRoute
+                      element={SavedMovies}
+                      loggedIn={loggedIn}
+                      movies={movies}
+                      isSend={isSend}
+                    />
+                    <Footer />
+                  </>
+                }
+              ></Route>
+
+              <Route
+                path="/profile"
+                element={
                   <ProtectedRoute
-                    element={Movies}
+                    element={Profile}
                     loggedIn={loggedIn}
-                    movies={movies}
+                    onUpdateUser={handleUpdateUser}
+                    handleLogOut={handleLogOut}
                     isSend={isSend}
+                    isEditData={isEditData}
+                    setIsEditData={setIsEditData}
+                    isEditAnswer={isEditAnswer}
+                    setIsEditAnswer={setIsEditAnswer}
+                    isError={isError}
+                    setIsError={setIsError}
                   />
-                  <Footer />
-                </>
-              }
-            ></Route>
+                }
+              ></Route>
 
-            <Route
-              path="/saved-movies"
-              element={
-                <>
-                  <ProtectedRoute
-                    element={SavedMovies}
-                    loggedIn={loggedIn}
-                    movies={movies}
+              <Route
+                path="/signup"
+                element={
+                  <Register
+                    handleRegister={handleRegister}
                     isSend={isSend}
+                    isError={isError}
+                    setIsError={setIsError}
                   />
-                  <Footer />
-                </>
-              }
-            ></Route>
+                }
+              />
 
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute
-                  element={Profile}
-                  loggedIn={loggedIn}
-                  onUpdateUser={handleUpdateUser}
-                  handleLogOut={handleLogOut}
-                  isSend={isSend}
-                  isEditData={isEditData}
-                  setIsEditData={setIsEditData}
-                  isEditAnswer={isEditAnswer}
-                  setIsEditAnswer={setIsEditAnswer}
-                  isError={isError}
-                  setIsError={setIsError}
-                />
-              }
-            ></Route>
+              <Route
+                path="/signin"
+                element={
+                  <Login
+                    handleLogin={handleLogin}
+                    isSend={isSend}
+                    isError={isError}
+                    setIsError={setIsError}
+                  />
+                }
+              />
 
-            <Route
-              path="/signup"
-              element={
-                <Register
-                  handleRegister={handleRegister}
-                  isSend={isSend}
-                  isError={isError}
-                  setIsError={setIsError}
-                />
-              }
-            />
-
-            <Route
-              path="/signin"
-              element={
-                <Login
-                  handleLogin={handleLogin}
-                  isSend={isSend}
-                  isError={isError}
-                  setIsError={setIsError}
-                />
-              }
-            />
-
-            <Route path="*" element={<Page404 />} />
-          </Routes>
+              <Route path="*" element={<Page404 />} />
+            </Routes>
+          )}
         </div>
       </div>
     </CurrentUserContext.Provider>

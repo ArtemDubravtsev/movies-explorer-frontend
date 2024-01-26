@@ -38,7 +38,7 @@ export default function Register({
           required
           minLength={2}
           maxLength={30}
-          value={values.username}
+          value={values.username ? values.username : ""}
           onChange={handleChange}
         />
         <p className="form__input-error">{error.username}</p>
@@ -52,7 +52,7 @@ export default function Register({
           className="form__input-field"
           placeholder="E-mail"
           required
-          value={values.email}
+          value={values.email ? values.email : ""}
           onChange={handleChange}
         />
         <p className="form__input-error">{error.email}</p>
@@ -68,7 +68,7 @@ export default function Register({
           required
           minLength={3}
           maxLength={14}
-          value={values.password}
+          value={values.password ? values.password : ""}
           onChange={handleChange}
         />
         <p className="form__input-error form__input-error_display">

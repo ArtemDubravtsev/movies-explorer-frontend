@@ -31,14 +31,14 @@ function Header({ loggedIn }) {
           <NavLink
             to="/movies"
             className="header__button"
-            activeClassName="header__button_active"
+            activeclassname="header__button_active"
           >
             Фильмы
           </NavLink>
           <NavLink
             to="/saved-movies"
             className="header__button"
-            activeClassName="header__button_active"
+            activeclassname="header__button_active"
           >
             Сохранённые фильмы
           </NavLink>
