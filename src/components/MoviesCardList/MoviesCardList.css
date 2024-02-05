@@ -1,6 +1,5 @@
 .moviescardlist {
   height: 100%;
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   border: 0;
@@ -9,12 +8,23 @@
 
 .moviescardlist__list {
   padding: 0;
-  margin: 78px 70px 0;
+  margin: 78px 70px auto;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 37px 28px;
   border: 0;
+}
+
+.moviescardlist__message {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  color: rgba(139, 139, 139, 1);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  text-align: center;
 }
 
 .moviescardlist__more {
@@ -27,6 +37,7 @@
   margin: 0 auto;
   padding-top: 60px;
   padding-bottom: 80px;
+  display: none;
 }
 
 .moviescardlist__button {

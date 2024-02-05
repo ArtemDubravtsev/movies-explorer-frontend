@@ -39,7 +39,10 @@ export default function Register({
           minLength={2}
           maxLength={30}
           value={values.username ? values.username : ""}
-          onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt);
+            setIsError(false);
+          }}
         />
         <p className="form__input-error">{error.username}</p>
       </label>
@@ -53,7 +56,10 @@ export default function Register({
           placeholder="E-mail"
           required
           value={values.email ? values.email : ""}
-          onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt);
+            setIsError(false);
+          }}
         />
         <p className="form__input-error">{error.email}</p>
       </label>
@@ -69,7 +75,10 @@ export default function Register({
           minLength={3}
           maxLength={14}
           value={values.password ? values.password : ""}
-          onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt);
+            setIsError(false);
+          }}
         />
         <p className="form__input-error form__input-error_display">
           {error.password}

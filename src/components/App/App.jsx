@@ -1,11 +1,11 @@
 import React from "react";
+
 import {
   registration,
   authorization,
   getUserData,
 } from "../../utils/RegisterAuth";
 import MainApi from "../../utils/MainApi";
-import MoviesApi from "../../utils/MoviesApi";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -31,9 +31,7 @@ function App() {
   const [isCheckToken, setIsCheckToken] = useState(true);
   //юзер контекст
   const [currentUser, setCurrentUser] = useState({});
-  //мувис
-  const [movies, setMovies] = useState([]);
-  //отправка данных
+  //отправка данных(прелоадер)
   const [isSend, setIsSend] = useState(false);
   //редактирование данных юзера
   const [isEditData, setIsEditData] = useState(false);
@@ -41,6 +39,8 @@ function App() {
   const [isEditAnswer, setIsEditAnswer] = useState(false);
   //ошибки
   const [isError, setIsError] = useState(false);
+  //сохраненные фильмы
+  const [savedMovies, setSavedMovies] = useState([]);
 
   function handleRegister(username, email, password) {
     setIsSend(true);
@@ -98,15 +98,43 @@ function App() {
     navigate("/");
   }
 
+  function handleLikeMovie(data) {
+    const isLikeMovie = savedMovies.some((item) => data.id === item.movieId);
+    const filterMovie = savedMovies.filter((item) => {
+      return item.movieId === data.id;
+    });
+    if (isLikeMovie) {
+      handleDeleteMovie(filterMovie[0]._id);
+    } else {
+      MainApi.saveMovies(data, localStorage.jwt)
+        .then((res) => {
+          setSavedMovies([res, ...savedMovies]);
+        })
+        .catch((err) => console.error(`Ошибка при лайке фильма ${err}`));
+    }
+  }
+
+  function handleDeleteMovie(movieId) {
+    MainApi.deleteMovies(movieId, localStorage.jwt)
+      .then(() => {
+        setSavedMovies(
+          savedMovies.filter((item) => {
+            return item._id !== movieId;
+          })
+        );
+      })
+      .catch((err) => console.error(`Ошибка при удалении фильма ${err}`));
+  }
+
   useEffect(() => {
     if (localStorage.jwt) {
       Promise.all([
         MainApi.getInfo(localStorage.jwt),
-        MoviesApi.getMovies(localStorage.jwt),
+        MainApi.getMovies(localStorage.jwt),
       ])
         .then(([dataUser, dataMovies]) => {
-          setMovies(dataMovies);
           setCurrentUser(dataUser);
+          setSavedMovies(dataMovies);
           setLoggedIn(true);
           setIsCheckToken(false);
         })
@@ -157,8 +185,12 @@ function App() {
                     <ProtectedRoute
                       element={Movies}
                       loggedIn={loggedIn}
-                      movies={movies}
                       isSend={isSend}
+                      setIsSend={setIsSend}
+                      isError={isError}
+                      setIsError={setIsError}
+                      savedMovies={savedMovies}
+                      handleLikeMovie={handleLikeMovie}
                     />
                     <Footer />
                   </>
@@ -172,8 +204,12 @@ function App() {
                     <ProtectedRoute
                       element={SavedMovies}
                       loggedIn={loggedIn}
-                      movies={movies}
                       isSend={isSend}
+                      setIsSend={setIsSend}
+                      isError={isError}
+                      setIsError={setIsError}
+                      savedMovies={savedMovies}
+                      handleDeleteMovie={handleDeleteMovie}
                     />
                     <Footer />
                   </>

@@ -32,7 +32,10 @@ export default function Login({ handleLogin, isSend, isError, setIsError }) {
           placeholder="E-mail"
           required
           value={values.email ? values.email : ""}
-          onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt);
+            setIsError(false);
+          }}
         />
         <p className="form__input-error">{error.email}</p>
       </label>
@@ -48,7 +51,10 @@ export default function Login({ handleLogin, isSend, isError, setIsError }) {
           minLength={3}
           maxLength={14}
           value={values.password ? values.password : ""}
-          onChange={handleChange}
+          onChange={(evt) => {
+            handleChange(evt);
+            setIsError(false);
+          }}
         />
         <p className="form__input-error">{error.password}</p>
       </label>
