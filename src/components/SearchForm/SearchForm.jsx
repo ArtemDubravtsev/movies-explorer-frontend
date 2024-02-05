@@ -67,7 +67,9 @@ export default function SearchForm({
           </div>
         </form>
         {isError ? (
-          <span className="searchform__message">Введите название фильма</span>
+          <span className="searchform__message">
+            Нужно ввести ключевое слово
+          </span>
         ) : (
           ""
         )}

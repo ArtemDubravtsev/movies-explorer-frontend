@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
+import {
+  MIN_SIZE_FOR_LARGE_SCREEN,
+  MAX_SIZE_FOR_MEDIUM_SCREEN,
+  MIN_SIZE_FOR_MEDIUM_SCREEN,
+  MAX_SIZE_FOR_SMALL_SCREEN,
+  MOVIES_AMOUNT_LARGE,
+  MOVIES_AMOUNT_MEDIUM,
+  MOVIES_AMOUNT_SMALL,
+  MOVIES_MORE_LARGE,
+  MOVIES_MORE_SMALL,
+} from "../../utils/configShowMovies";
 
 export default function MoviesCardList({
   movies,
@@ -14,6 +25,50 @@ export default function MoviesCardList({
   filterMoviesSave,
 }) {
   const location = useLocation();
+  const [showMoviesAmount, setShowMoviesAmount] = useState(0);
+
+  function handleShowMoviesAmount() {
+    const display = window.innerWidth;
+    if (display > MIN_SIZE_FOR_LARGE_SCREEN) {
+      setShowMoviesAmount(MOVIES_AMOUNT_LARGE);
+    } else if (
+      display > MIN_SIZE_FOR_MEDIUM_SCREEN &&
+      display < MAX_SIZE_FOR_MEDIUM_SCREEN
+    ) {
+      setShowMoviesAmount(MOVIES_AMOUNT_MEDIUM);
+    } else if (display < MAX_SIZE_FOR_SMALL_SCREEN) {
+      setShowMoviesAmount(MOVIES_AMOUNT_SMALL);
+    }
+  }
+
+  function clickShowMoreMovies() {
+    const display = window.innerWidth;
+    if (display > MIN_SIZE_FOR_LARGE_SCREEN) {
+      setShowMoviesAmount(showMoviesAmount + MOVIES_MORE_LARGE);
+    } else if (
+      display > MIN_SIZE_FOR_MEDIUM_SCREEN &&
+      display < MAX_SIZE_FOR_MEDIUM_SCREEN
+    ) {
+      setShowMoviesAmount(showMoviesAmount + MOVIES_MORE_SMALL);
+    } else if (display < MAX_SIZE_FOR_SMALL_SCREEN) {
+      setShowMoviesAmount(showMoviesAmount + MOVIES_MORE_SMALL);
+    }
+  }
+
+  useEffect(() => {
+    if (location.pathname === "/movies") {
+      handleShowMoviesAmount();
+    }
+  }, [location]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.addEventListener("resize", handleShowMoviesAmount);
+    }, 500);
+    return () => {
+      window.removeEventListener("resize", handleShowMoviesAmount);
+    };
+  }, []);
 
   return (
     <section className="moviescardlist">
@@ -22,7 +77,7 @@ export default function MoviesCardList({
       ) : (
         <ul className="moviescardlist__list">
           {location.pathname === "/movies" && filterMovies.length !== 0 ? (
-            filterMovies.map((data) => {
+            filterMovies.slice(0, showMoviesAmount).map((data) => {
               return (
                 <MoviesCard
                   key={data.id}
@@ -93,11 +148,20 @@ export default function MoviesCardList({
         </ul>
       )}
 
-      <div className="moviescardlist__more">
-        <button type="button" className="moviescardlist__button">
-          Ещё
-        </button>
-      </div>
+      {location.pathname === "/movies" &&
+      filterMovies.length > showMoviesAmount ? (
+        <div className="moviescardlist__more">
+          <button
+            type="button"
+            className="moviescardlist__button"
+            onClick={clickShowMoreMovies}
+          >
+            Ещё
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </section>
   );
 }
