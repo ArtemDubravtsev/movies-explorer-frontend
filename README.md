@@ -1,3 +1,13 @@
+# Ссылка на задеплоенный на сервере проект:
+https://artmovie.nomoredomainswork.ru
+
+
+# Ссылка на пул реквест:
+https://github.com/ArtemDubravtsev/movies-explorer-frontend/pull/2
+
+
+
+
 # Дипломная работа Яндекс-Практикум
 
 # Этап: Функциональность на «React» и JS
