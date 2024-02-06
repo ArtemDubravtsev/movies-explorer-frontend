@@ -31,7 +31,12 @@ export default function MoviesCard({
 
   return (
     <div className="moviescard">
-      <a href={data.trailerLink} className="moviescard__link">
+      <a
+        href={data.trailerLink}
+        className="moviescard__link"
+        target="_blank"
+        rel="noreferrer"
+      >
         <img
           src={
             pathname === "/movies"
