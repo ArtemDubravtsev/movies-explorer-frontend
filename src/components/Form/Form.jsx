@@ -15,6 +15,7 @@ export default function Form({
   isSend,
   isError,
   setIsError,
+  validEmail,
 }) {
   const location = useLocation();
 
@@ -51,9 +52,11 @@ export default function Form({
               <button
                 type="submit"
                 className={`form__button ${
-                  isSend || !isValid || isError ? "form__button_disabled" : ""
+                  isSend || !isValid || isError || !validEmail
+                    ? "form__button_disabled"
+                    : ""
                 }`}
-                disabled={isSend || !isValid || isError}
+                disabled={isSend || !isValid || isError || !validEmail}
               >
                 {submit}
               </button>

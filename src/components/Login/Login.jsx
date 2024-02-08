@@ -3,7 +3,14 @@ import Form from "../Form/Form";
 import UseForm from "../../utils/UseForm";
 
 export default function Login({ handleLogin, isSend, isError, setIsError }) {
-  const { values, error, isValid, handleChange } = UseForm();
+  const {
+    values,
+    error,
+    isValid,
+    handleChange,
+    validEmail,
+    handleEmailChange,
+  } = UseForm();
 
   function onLogin(evt) {
     evt.preventDefault();
@@ -22,6 +29,7 @@ export default function Login({ handleLogin, isSend, isError, setIsError }) {
       isValid={isValid}
       isError={isError}
       setIsError={setIsError}
+      validEmail={validEmail}
     >
       <label className="form__input">
         <p className="form__input-title">E-mail</p>
@@ -33,6 +41,7 @@ export default function Login({ handleLogin, isSend, isError, setIsError }) {
           required
           value={values.email ? values.email : ""}
           onChange={(evt) => {
+            handleEmailChange(evt);
             handleChange(evt);
             setIsError(false);
           }}

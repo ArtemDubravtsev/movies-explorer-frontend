@@ -8,7 +8,14 @@ export default function Register({
   isError,
   setIsError,
 }) {
-  const { values, error, isValid, handleChange } = UseForm();
+  const {
+    values,
+    error,
+    isValid,
+    handleChange,
+    validEmail,
+    handleEmailChange,
+  } = UseForm();
 
   function onRegister(evt) {
     evt.preventDefault();
@@ -27,6 +34,7 @@ export default function Register({
       isValid={isValid}
       isError={isError}
       setIsError={setIsError}
+      validEmail={validEmail}
     >
       <label className="form__input">
         <p className="form__input-title">Имя</p>
@@ -57,6 +65,7 @@ export default function Register({
           required
           value={values.email ? values.email : ""}
           onChange={(evt) => {
+            handleEmailChange(evt);
             handleChange(evt);
             setIsError(false);
           }}

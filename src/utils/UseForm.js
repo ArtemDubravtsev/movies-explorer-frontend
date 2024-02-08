@@ -7,6 +7,9 @@ export default function UseForm() {
   const [error, setError] = useState({});
   //валидность формы
   const [isValid, setIsValid] = useState(false);
+  //валидность email
+  const emailRegex = /^\S+@\S+\.\S+$/;
+  const [validEmail, setValidEmail] = useState(false);
 
   function handleChange(evt) {
     const name = evt.target.name;
@@ -25,11 +28,25 @@ export default function UseForm() {
     setIsValid(form.checkValidity());
   }
 
+  const handleEmailChange = (evt) => {
+    const enteredEmail = evt.target.value;
+    setValidEmail(emailRegex.test(enteredEmail));
+  };
+
   const setValue = useCallback((name, value) => {
     setValues((firstValues) => {
       return { ...firstValues, [name]: value };
     });
   }, []);
 
-  return { values, error, isValid, handleChange, setValue, setError };
+  return {
+    values,
+    error,
+    isValid,
+    handleChange,
+    setValue,
+    setError,
+    validEmail,
+    handleEmailChange,
+  };
 }
