@@ -1,16 +1,13 @@
 import React from "react";
-
 import {
   registration,
   authorization,
   getUserData,
 } from "../../utils/RegisterAuth";
 import MainApi from "../../utils/MainApi";
-
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
-
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -46,7 +43,7 @@ function App() {
     setIsSend(true);
     registration(username, email, password)
       .then(() => {
-        handleLogin(username, email, password);
+        handleLogin(password, email);
       })
       .catch((err) => {
         setIsError(true);
@@ -57,9 +54,9 @@ function App() {
       });
   }
 
-  function handleLogin(email, password) {
+  function handleLogin(password, email) {
     setIsSend(true);
-    authorization(email, password)
+    authorization(password, email)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
