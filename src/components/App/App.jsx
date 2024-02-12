@@ -5,7 +5,7 @@ import {
   getUserData,
 } from "../../utils/RegisterAuth";
 import MainApi from "../../utils/MainApi";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import Header from "../Header/Header";
@@ -61,7 +61,7 @@ function App() {
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
         setCurrentUser(res);
-        navigate("/movies");
+        navigate("/movies", { replace: true });
       })
       .catch((err) => {
         setIsError(true);
@@ -90,8 +90,9 @@ function App() {
   }
 
   function handleLogOut() {
-    localStorage.clear();
     setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    localStorage.clear();
     navigate("/");
   }
 
@@ -233,26 +234,34 @@ function App() {
               ></Route>
 
               <Route
-                path="/signup"
+                path={"/signup"}
                 element={
-                  <Register
-                    handleRegister={handleRegister}
-                    isSend={isSend}
-                    isError={isError}
-                    setIsError={setIsError}
-                  />
+                  loggedIn ? (
+                    <Navigate to="/movies" replace />
+                  ) : (
+                    <Register
+                      handleRegister={handleRegister}
+                      isSend={isSend}
+                      isError={isError}
+                      setIsError={setIsError}
+                    />
+                  )
                 }
               />
 
               <Route
-                path="/signin"
+                path={"/signin"}
                 element={
-                  <Login
-                    handleLogin={handleLogin}
-                    isSend={isSend}
-                    isError={isError}
-                    setIsError={setIsError}
-                  />
+                  loggedIn ? (
+                    <Navigate to="/movies" replace />
+                  ) : (
+                    <Login
+                      handleLogin={handleLogin}
+                      isSend={isSend}
+                      isError={isError}
+                      setIsError={setIsError}
+                    />
+                  )
                 }
               />
 
