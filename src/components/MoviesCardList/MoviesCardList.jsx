@@ -15,7 +15,7 @@ import {
 } from "../../utils/configShowMovies";
 
 export default function MoviesCardList({
-  movies,
+  allMovies,
   savedMovies,
   isSend,
   filterMovies,
@@ -92,7 +92,7 @@ export default function MoviesCardList({
               {location.pathname === "/movies" &&
               !searchError &&
               filterMovies.length === 0 &&
-              movies.length === 0 ? (
+              allMovies.length === 0 ? (
                 <span className="moviescardlist__message">
                   «Выполните поиск чтобы увидеть список фильмов»
                 </span>
@@ -102,7 +102,7 @@ export default function MoviesCardList({
 
               {location.pathname === "/movies" &&
               !searchError &&
-              movies.length !== 0 ? (
+              allMovies.length !== 0 ? (
                 <span className="moviescardlist__message">
                   «По вашему запросу ничего не найдено»
                 </span>

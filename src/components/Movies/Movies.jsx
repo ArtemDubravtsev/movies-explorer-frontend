@@ -12,39 +12,39 @@ export default function Movies({
   handleLikeMovie,
 }) {
   //все фильмы
-  const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
   //отфильтрованные фильмы
   const [filterMovies, setFilterMovies] = useState([]);
   //ошибка окна результатов
   const [searchError, setSearchError] = useState(false);
   //состояние чекбокса
-  const [checkBox, setCheckBox] = useState(false);
+  const [isCheckBox, setIsCheckBox] = useState(false);
   //поле поиска
   const [searchData, setSearchData] = useState("");
 
-  const filterAllMovies = useCallback((movies, searchData, checkBox) => {
-    localStorage.setItem("allMovies", JSON.stringify(movies));
-    localStorage.setItem("searchData", JSON.stringify(searchData));
-    localStorage.setItem("checkBox", JSON.stringify(checkBox));
-    setSearchData(searchData);
+  const filterAllMovies = useCallback((allMovies, searchInput, isCheckBox) => {
+    localStorage.setItem("movies", JSON.stringify(allMovies));
+    localStorage.setItem("searchField", JSON.stringify(searchInput));
+    localStorage.setItem("checkBoxState", JSON.stringify(isCheckBox));
+    setSearchData(searchInput);
     setFilterMovies(
-      movies.filter((item) => {
+      allMovies.filter((item) => {
         const itemName = item.nameRU
           .toLowerCase()
-          .includes(searchData.toLowerCase());
-        return checkBox ? itemName && item.duration <= 40 : itemName;
+          .includes(searchInput.toLowerCase());
+        return isCheckBox ? itemName && item.duration <= 40 : itemName;
       })
     );
   }, []);
 
-  function searchMovies(searchData) {
-    if (movies.length === 0) {
+  function searchMovies(searchInput) {
+    if (allMovies.length === 0) {
       setIsSend(true);
       MoviesApi.getMovies()
         .then((res) => {
-          setMovies(res);
+          setAllMovies(res);
           setSearchError(false);
-          filterAllMovies(res, searchData, checkBox);
+          filterAllMovies(res, searchInput, isCheckBox);
         })
         .catch((error) => {
           setSearchError(true);
@@ -54,34 +54,35 @@ export default function Movies({
           setIsSend(false);
         });
     } else {
-      filterAllMovies(movies, searchData, checkBox);
+      filterAllMovies(allMovies, searchInput, isCheckBox);
     }
   }
 
-  function handleCheckBox() {
-    if (checkBox) {
-      setCheckBox(false);
-      filterAllMovies(movies, searchData, false);
+  function handleCheckBox(searchQuery) {
+    localStorage.setItem("searchField", JSON.stringify(searchQuery));
+    if (isCheckBox) {
+      setIsCheckBox(false);
+      filterAllMovies(allMovies, searchQuery, false);
     } else {
-      setCheckBox(true);
-      filterAllMovies(movies, searchData, true);
+      setIsCheckBox(true);
+      filterAllMovies(allMovies, searchQuery, true);
     }
   }
 
   useEffect(() => {
     if (
-      localStorage.allMovies &&
-      localStorage.searchData &&
-      localStorage.checkBox
+      localStorage.movies &&
+      localStorage.searchField &&
+      localStorage.checkBoxState
     ) {
-      const allMovies = JSON.parse(localStorage.allMovies);
-      const searchData = JSON.parse(localStorage.searchData);
-      const checkBox = JSON.parse(localStorage.checkBox);
+      const userMovies = JSON.parse(localStorage.movies);
+      const userSearch = JSON.parse(localStorage.searchField);
+      const userCheckBox = JSON.parse(localStorage.checkBoxState);
       setSearchError(false);
-      setMovies(allMovies);
-      setSearchData(searchData);
-      setCheckBox(checkBox);
-      filterAllMovies(allMovies, searchData, checkBox);
+      setAllMovies(userMovies);
+      setSearchData(userSearch);
+      setIsCheckBox(userCheckBox);
+      filterAllMovies(userMovies, userSearch, userCheckBox);
     }
   }, [filterAllMovies]);
 
@@ -90,15 +91,14 @@ export default function Movies({
       <SearchForm
         searchMovies={searchMovies}
         searchData={searchData}
-        checkBox={checkBox}
+        isCheckBox={isCheckBox}
         handleCheckBox={handleCheckBox}
         isError={isError}
         setIsError={setIsError}
       />
       <MoviesCardList
-        movies={movies}
+        allMovies={allMovies}
         savedMovies={savedMovies}
-        setMovies={setMovies}
         filterMovies={filterMovies}
         isSend={isSend}
         searchError={searchError}

@@ -3,8 +3,6 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 export default function SavedMovies({
-  movies,
-  setMovies,
   isSend,
   isError,
   setIsError,
@@ -17,37 +15,37 @@ export default function SavedMovies({
   //поле поиска
   const [searchDataSave, setSearchDataSave] = useState("");
   //состояние чекбокса
-  const [checkBoxSave, setCheckBoxSave] = useState(false);
+  const [isCheckBoxSave, setIsCheckBoxSave] = useState(false);
 
-  const filterSaveMovies = useCallback((movies, searchData, checkBox) => {
+  const filterSaveMovies = useCallback((movies, searchData, isCheckBoxSave) => {
     setSearchDataSave(searchData);
     setFilterMoviesSave(
       movies.filter((item) => {
         const itemName = item.nameRU
           .toLowerCase()
           .includes(searchData.toLowerCase());
-        return checkBox ? itemName && item.duration <= 40 : itemName;
+        return isCheckBoxSave ? itemName && item.duration <= 40 : itemName;
       })
     );
   }, []);
 
   function searcSaveMovies(searchDataSave) {
-    filterSaveMovies(savedMovies, searchDataSave, checkBoxSave);
+    filterSaveMovies(savedMovies, searchDataSave, isCheckBoxSave);
   }
 
-  function handleSaveCheckBox() {
-    if (checkBoxSave) {
-      setCheckBoxSave(false);
-      filterSaveMovies(savedMovies, searchDataSave, false);
+  function handleSaveCheckBox(searchQuery) {
+    if (isCheckBoxSave) {
+      setIsCheckBoxSave(false);
+      filterSaveMovies(savedMovies, searchQuery, false);
     } else {
-      setCheckBoxSave(true);
-      filterSaveMovies(savedMovies, searchDataSave, true);
+      setIsCheckBoxSave(true);
+      filterSaveMovies(savedMovies, searchQuery, true);
     }
   }
 
   useEffect(() => {
-    filterSaveMovies(savedMovies, searchDataSave, checkBoxSave);
-  }, [filterSaveMovies, savedMovies, searchDataSave, checkBoxSave]);
+    filterSaveMovies(savedMovies, searchDataSave, isCheckBoxSave);
+  }, [filterSaveMovies, savedMovies, searchDataSave, isCheckBoxSave]);
 
   return (
     <main>
@@ -56,13 +54,11 @@ export default function SavedMovies({
         setIsError={setIsError}
         searchData={searchDataSave}
         searchMovies={searcSaveMovies}
-        checkBox={checkBoxSave}
+        isCheckBox={isCheckBoxSave}
         handleCheckBox={handleSaveCheckBox}
       />
       <MoviesCardList
-        movies={movies}
         savedMovies={savedMovies}
-        setMovies={setMovies}
         isSend={isSend}
         searchError={searchError}
         handleDeleteMovie={handleDeleteMovie}

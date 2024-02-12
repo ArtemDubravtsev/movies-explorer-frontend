@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import FilterCheckboxMobile from "../FilterCheckboxMobile/FilterCheckboxMobile";
 import search_ikon from "../../images/search_icon.svg";
@@ -10,10 +10,16 @@ export default function SearchForm({
   isError,
   setIsError,
   searchData,
-  checkBox,
+  isCheckBox,
   handleCheckBox,
 }) {
-  const { values, handleChange, setValue } = UseForm();
+  const { setValue } = UseForm();
+  //хранениние введенного запроса поиска фильмов
+  const [query, setQuery] = useState("");
+
+  function handleQueryChange(evt) {
+    setQuery(evt.target.value);
+  }
 
   useEffect(() => {
     setValue("search", searchData);
@@ -28,6 +34,10 @@ export default function SearchForm({
       setIsError(true);
     }
   }
+
+  const getQuery = () => {
+    return query;
+  };
 
   return (
     <section className="searchform">
@@ -44,11 +54,8 @@ export default function SearchForm({
             name="search"
             placeholder="Фильм"
             className="searchform__form-input"
-            value={values.search || ""}
-            onChange={(evt) => {
-              handleChange(evt);
-              setIsError(false);
-            }}
+            value={query || ""}
+            onChange={handleQueryChange}
           />
 
           <button type="submit" className="searchform__button">
@@ -58,12 +65,17 @@ export default function SearchForm({
           <div className="searchform__wrapperCheckboxOne">
             <FilterCheckbox
               className="search-form__checkbox"
-              checkBox={checkBox}
+              isCheckBox={isCheckBox}
               handleCheckBox={handleCheckBox}
+              getQuery={getQuery}
             />
           </div>
           <div className="searchform__wrapperCheckboxTwo">
-            <FilterCheckboxMobile />
+            <FilterCheckboxMobile
+              isCheckBox={isCheckBox}
+              handleCheckBox={handleCheckBox}
+              getQuery={getQuery}
+            />
           </div>
         </form>
         {isError ? (
