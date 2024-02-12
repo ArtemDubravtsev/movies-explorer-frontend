@@ -73,8 +73,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  //baseUrl: "https://api.artmovie.nomoredomainsmonster.ru",
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.artmovie.nomoredomainsmonster.ru",
 });
 
 export default mainApi;
