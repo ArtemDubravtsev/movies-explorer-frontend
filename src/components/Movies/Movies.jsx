@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoviesApi from "../../utils/MoviesApi";
+import { MAX_FILM_DURATION } from "../../utils/configShowMovies";
 
 export default function Movies({
   isSend,
@@ -32,7 +33,9 @@ export default function Movies({
         const itemName = item.nameRU
           .toLowerCase()
           .includes(searchInput.toLowerCase());
-        return isCheckBox ? itemName && item.duration <= 40 : itemName;
+        return isCheckBox
+          ? itemName && item.duration <= MAX_FILM_DURATION
+          : itemName;
       })
     );
   }, []);
