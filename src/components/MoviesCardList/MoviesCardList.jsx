@@ -6,7 +6,6 @@ import {
   MIN_SIZE_FOR_LARGE_SCREEN,
   MAX_SIZE_FOR_MEDIUM_SCREEN,
   MIN_SIZE_FOR_MEDIUM_SCREEN,
-  MAX_SIZE_FOR_SMALL_SCREEN,
   MOVIES_AMOUNT_LARGE,
   MOVIES_AMOUNT_MEDIUM,
   MOVIES_AMOUNT_SMALL,
@@ -31,26 +30,20 @@ export default function MoviesCardList({
     const display = window.innerWidth;
     if (display > MIN_SIZE_FOR_LARGE_SCREEN) {
       setShowMoviesAmount(MOVIES_AMOUNT_LARGE);
-    } else if (
-      display > MIN_SIZE_FOR_MEDIUM_SCREEN &&
-      display < MAX_SIZE_FOR_MEDIUM_SCREEN
-    ) {
+    } else if (display > MIN_SIZE_FOR_MEDIUM_SCREEN) {
       setShowMoviesAmount(MOVIES_AMOUNT_MEDIUM);
-    } else if (display < MAX_SIZE_FOR_SMALL_SCREEN) {
+    } else {
       setShowMoviesAmount(MOVIES_AMOUNT_SMALL);
     }
   }
 
   function clickShowMoreMovies() {
     const display = window.innerWidth;
-    if (display > MIN_SIZE_FOR_LARGE_SCREEN) {
+    if (display > MAX_SIZE_FOR_MEDIUM_SCREEN) {
       setShowMoviesAmount(showMoviesAmount + MOVIES_MORE_LARGE);
-    } else if (
-      display > MIN_SIZE_FOR_MEDIUM_SCREEN &&
-      display < MAX_SIZE_FOR_MEDIUM_SCREEN
-    ) {
+    } else if (display > MIN_SIZE_FOR_MEDIUM_SCREEN) {
       setShowMoviesAmount(showMoviesAmount + MOVIES_MORE_SMALL);
-    } else if (display < MAX_SIZE_FOR_SMALL_SCREEN) {
+    } else {
       setShowMoviesAmount(showMoviesAmount + MOVIES_MORE_SMALL);
     }
   }
@@ -59,7 +52,7 @@ export default function MoviesCardList({
     if (location.pathname === "/movies") {
       handleShowMoviesAmount();
     }
-  }, [location]);
+  }, [location, filterMovies]);
 
   useEffect(() => {
     setTimeout(() => {
