@@ -18,6 +18,7 @@ function Navigation({ handleCloseMobileMenu }) {
             to="/"
             className="navigation__link"
             activeClassName="navigation__link_active"
+            onClick={handleCloseMobileMenu}
           >
             Главная
           </NavLink>
@@ -25,6 +26,7 @@ function Navigation({ handleCloseMobileMenu }) {
             to="/movies"
             className="navigation__link"
             activeClassName="navigation__link_active"
+            onClick={handleCloseMobileMenu}
           >
             Фильмы
           </NavLink>
@@ -32,11 +34,16 @@ function Navigation({ handleCloseMobileMenu }) {
             to="/saved-movies"
             className="navigation__link"
             activeClassName="navigation__link_active"
+            onClick={handleCloseMobileMenu}
           >
             Сохранённые фильмы
           </NavLink>
         </nav>
-        <Link to="/profile" className="navigation__button-account">
+        <Link
+          to="/profile"
+          className="navigation__button-account"
+          onClick={handleCloseMobileMenu}
+        >
           <span className="navigation__button-text">Аккаунт</span>
           <img
             className="navigation__button-ikon"

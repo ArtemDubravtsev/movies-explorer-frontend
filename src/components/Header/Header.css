@@ -17,10 +17,6 @@
   padding: 0 70px;
 }
 
-.header_color {
-  background: rgba(7, 48, 66, 1);
-}
-
 .header__button-container {
   display: flex;
   gap: 30px;
@@ -75,6 +71,8 @@
   justify-content: space-between;
 }
 
+
+
 .header__button-icon {
   margin-right: 4px;
   padding: 6px;
@@ -102,6 +100,10 @@
   display: none;
   cursor: pointer;
   padding: 0;
+}
+
+.header_color {
+  background: rgba(7, 48, 66, 1);
 }
 
 .header__menu-button:hover {

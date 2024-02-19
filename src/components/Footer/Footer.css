@@ -6,6 +6,7 @@
   margin-left: 70px;
   margin-right: 70px;
   padding-bottom: 20px;
+  align-self: flex-end;
 }
 
 .footer__container {
